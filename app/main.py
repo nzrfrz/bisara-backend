@@ -1,0 +1,21 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from .router import user_router
+
+app = FastAPI()
+
+# CORS
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],  # adjust later
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
+
+app.include_router(user_router.router, prefix="/api")
+
+@app.get("/")
+def root():
+  return {"message": "Python FastAPI server running"}

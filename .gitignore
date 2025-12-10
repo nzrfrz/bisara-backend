@@ -1,0 +1,69 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+*.log
+*.sqlite3
+*.db
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Byte-compiled / optimized files
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Pip dependency directories
+pip-wheel-metadata/
+
+# === FastAPI / Uvicorn ===
+*.pid
+
+# === VSCode ===
+.vscode/
+
+# === Environment Files ===
+.env
+.env.*
+!.env.example        # allow template env file to stay visible in repo
+
+# === OS junk ===
+.DS_Store
+Thumbs.db
+
+# === Cache ===
+.cache/
+pytest_cache/
+.mypy_cache/
+.pytest_cache/
+.pyre/
+
+# === Coverage ===
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+
+# === Logs ===
+logs/
+*.log
+
+# === Python packaging ===
+*.manifest
+*.spec
+
+# === Project specific ===
+# Ignore any upload or temp folders if added later
+uploads/
+tmp/
