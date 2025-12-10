@@ -31,7 +31,7 @@ async def user_logout(request: Request):
       status_code=status.HTTP_200_OK,
       content={
         "status": 200,
-        "message": "Payload Received",
+        "message": "You have been logged out",
         "data": {}
       }
     )
