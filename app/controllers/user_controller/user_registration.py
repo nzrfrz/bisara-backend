@@ -13,13 +13,22 @@ COLLECTION = db["users"]
 USER_ROLE = [
   'ROOT_ADMIN',
   'TEACHER',
-  'ANOTATOR'
+  'ANNOTATOR'
 ]
 
 async def user_registration(payload: UserMutable) -> User:
   try:
     now = datetime.now()
     hash_pass = hash_password(payload.password)
+    if not payload.email:
+      return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content={
+          "status": 400,
+          "message": "Email still empty",
+          "data": {}
+        }
+      )
 
     eisting_email = await find_one_query(COLLECTION, { 'email': payload.email })
     if eisting_email:
