@@ -1,3 +1,5 @@
+## Open terminal inside this project
+
 ### Create venv for this project
 ``` bash
 python -m venv venv
