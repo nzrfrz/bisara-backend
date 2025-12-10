@@ -81,7 +81,7 @@ async def user_login(payload: UserMutable) -> User:
       secure=True,
       samesite="none",
       max_age=3600,
-      path="/*",
+      path="/",
       domain=None
     )
 
@@ -92,7 +92,7 @@ async def user_login(payload: UserMutable) -> User:
       secure=True,
       samesite="none",
       max_age=3600,
-      path="/*",
+      path="/",
       domain=None
     )
 
