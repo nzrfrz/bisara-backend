@@ -11,6 +11,7 @@ app.add_middleware(
   allow_origins=[
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://bhisara.vercel.app",
     "https://bhinekaaksaranusantara.vercel.app"
   ],  # adjust later
   allow_credentials=True,
@@ -20,6 +21,6 @@ app.add_middleware(
 
 app.include_router(user_router.router, prefix="/api")
 
-@app.get("/")
+@app.get("/api")
 def root():
   return {"message": "Python FastAPI server running"}
