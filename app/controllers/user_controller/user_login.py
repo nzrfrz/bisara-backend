@@ -78,18 +78,18 @@ async def user_login(payload: UserMutable) -> User:
       key="accessToken",
       value=access_token,
       httponly=True,
-      secure=False,
-      samesite="lax",
+      secure=True,
+      samesite="none",
       max_age=3600,
       path="/"
     )
 
     response.set_cookie(
       key="user",
-      value=f"{user_found.get('username')};r{user_found['email']};r{access_token}",
+      value=f"{user_found.get('username')};r{user_found['email']};r{user_found['userRole']}",
       httponly=False,
-      secure=False,
-      samesite="lax",
+      secure=True,
+      samesite="none",
       max_age=3600,
       path="/"
     )

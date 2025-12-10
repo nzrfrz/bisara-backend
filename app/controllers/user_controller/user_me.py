@@ -27,6 +27,7 @@ async def user_me(request: Request):
           "_id": str(get_me["_id"]),
           "username": get_me["username"],
           "email": get_me["email"],
+          "userRole": get_me["userRole"],
         }
       }
     )

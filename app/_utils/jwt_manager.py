@@ -8,7 +8,7 @@ from jose import jwt, JWTError, ExpiredSignatureError
 
 SECRET_KEY = os.getenv("ACCESS_TOKEN_SECRET", "secret")
 ALGORITHM = "HS256"
-EXPIRATION_MINUTES = 5
+EXPIRATION_MINUTES = 480
 
 class TokenExpiredError(Exception):
   pass

@@ -10,7 +10,8 @@ app.add_middleware(
   CORSMiddleware,
   allow_origins=[
     "http://localhost:5173",
-    None
+    "http://127.0.0.1:5173",
+    "https://bhinekaaksaranusantara.vercel.app"
   ],  # adjust later
   allow_credentials=True,
   allow_methods=["*"],
