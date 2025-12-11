@@ -1,5 +1,7 @@
 # from typing import List
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends
+
+from .._utils.auth_manager import header_auth_checker
 
 from ..controllers.user_controller.user_registration import user_registration
 from ..controllers.user_controller.user_login import user_login
@@ -19,9 +21,9 @@ async def login_route(payload: User):
   return await user_login(payload)
 
 @router.get('/user/me/', response_model=User)
-async def me_route(request: Request):
-  return await user_me(request)
+async def me_route(user_id = Depends(header_auth_checker)):
+  return await user_me(user_id)
 
 @router.get('/user/logout/', response_model=User)
-async def logout_route(request: Request):
-  return await user_logout(request)
+async def logout_route(user_id = Depends(header_auth_checker)):
+  return await user_logout(user_id)

@@ -8,7 +8,8 @@ from jose import jwt, JWTError, ExpiredSignatureError
 
 SECRET_KEY = os.getenv("ACCESS_TOKEN_SECRET", "secret")
 ALGORITHM = "HS256"
-EXPIRATION_MINUTES = 480
+EXPIRATION_MINUTES = 5
+# 480
 
 class TokenExpiredError(Exception):
   pass
@@ -25,11 +26,13 @@ def access_token_generator(data: dict):
 
   return encoded_jwt
 
+def header_token_verifier(token: str) -> Dict[str, Any]:
+  payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+  return payload
+
+# use this to get the cookie token
 async def access_token_verifier(request: Request) -> Dict[str, Any]:
   try:
-    # pattern = r"['\s\{\}]"
-    # cookies_parts = re.sub(pattern, "", str(request.cookies.get("accessToken"))).strip("accessToken:").split(";r")
-    # token = cookies_parts[-1]
     token = request.cookies.get("accessToken")
     if not token:
       raise TokenInvalidError("Missing access token")

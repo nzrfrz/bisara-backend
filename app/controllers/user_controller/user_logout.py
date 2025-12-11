@@ -1,44 +1,22 @@
-from fastapi import Request, HTTPException, status
+from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
 
 from ..._utils.database import db
-from ..._utils.jwt_manager import (
-  TokenExpiredError, 
-  TokenInvalidError, 
-  access_token_verifier, 
-  response_token_expired, 
-  response_token_invalid
-)
 
 COLLECTION = db["users"]
 
-async def user_logout(request: Request):
+async def user_logout(user_id):
   try:
-    validate_token = await access_token_verifier(request)
-    if not validate_token:
-      return JSONResponse(
-      status_code=status.HTTP_100_CONTINUE,
-      content={
-        "status": 100,
-        "message": "You have been logged out",
-        "data": {}
-      }
-    )
-    print(validate_token)
-    # get_me = await find_one_by_id(COLLECTION, validate_token["_id"])
-
     return JSONResponse(
       status_code=status.HTTP_200_OK,
       content={
         "status": 200,
         "message": "You have been logged out",
-        "data": {}
+        "data": {
+          "_id": user_id
+        }
       }
     )
-  except TokenExpiredError:
-    return response_token_expired()
-  except TokenInvalidError:
-    return response_token_invalid()
   except Exception as error:
     print("error user logout: \n", error)
     raise HTTPException(

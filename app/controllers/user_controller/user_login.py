@@ -51,13 +51,12 @@ async def user_login(payload: UserMutable) -> User:
     access_token = access_token_generator({
       "_id": user_found_id,
       "email": user_found["email"],
-      "username": user_found.get("username")
+      "username": user_found.get("username"),
     })
 
     # update the access token field in DB
     await update_one(COLLECTION, user_found_id, { "accessToken": access_token, "updatedAt": datetime.now() })
     user_updated = await find_one_by_id(COLLECTION, user_found_id)
-    # print("user login: \n", user_updated)
 
     response = JSONResponse(
       status_code=status.HTTP_200_OK,
@@ -65,37 +64,13 @@ async def user_login(payload: UserMutable) -> User:
         "status": 200,
         "message": "Login successfull",
         "data": {
-          # "_id": user_found_id,
           "username": user_found["username"],
           "email": user_found["email"],
+          "userRole": user_updated["userRole"],
           "accessToken": user_updated["accessToken"]
         }
       }
     )
-
-    # set HTTPOnly cookie
-    response.set_cookie(
-      key="accessToken",
-      value=access_token,
-      httponly=True,
-      secure=True,
-      samesite="none",
-      max_age=3600,
-      path="/",
-      domain=None
-    )
-
-    response.set_cookie(
-      key="user",
-      value=f"{user_found.get('username')};r{user_found['email']};r{user_found['userRole']}",
-      httponly=False,
-      secure=True,
-      samesite="none",
-      max_age=3600,
-      path="/",
-      domain=None
-    )
-
     return response
   except Exception as error:
     print("error user login: \n", error)
