@@ -21,6 +21,6 @@ app.add_middleware(
 
 app.include_router(user_router.router, prefix="/api")
 
-@app.get("/api")
+@app.get("/")
 def root():
   return {"message": "Python FastAPI server running"}
