@@ -5,6 +5,19 @@ from .router import user_router, dictionary_router
 
 app = FastAPI()
 
+app = FastAPI(
+  title="BhISARA",
+  description="Bhineka Aksara Nusantara API",
+  version="1.0.0",
+  contact={
+    "name": "LapazSeturan",
+    "email": "lapazseturan@example.com"
+  },
+  license_info={
+    "name": "MIT"
+  }
+)
+
 # CORS
 app.add_middleware(
   CORSMiddleware,

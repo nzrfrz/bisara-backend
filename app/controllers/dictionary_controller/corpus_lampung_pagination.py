@@ -12,9 +12,9 @@ async def corpus_lampung_pagination(page, limit, corpus_status, q):
   try:
     query = {}
     if corpus_status:
-      query['corpus_status'] = corpus_status.upper()
+      query['status'] = corpus_status.upper()
 
-    if q:
+    if not q != "" or q:
       regex = re.compile(q, re.IGNORECASE)
       query["$or"] = [
         { "indonesia": regex },
