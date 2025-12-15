@@ -15,7 +15,8 @@ async def corpus_komering_pagination(page, limit, corpus_status, q):
       query['status'] = corpus_status.upper()
 
     if not q != "" or q:
-      regex = re.compile(q, re.IGNORECASE)
+      safe_q = re.escape(q)
+      regex = re.compile(safe_q, re.IGNORECASE)
       query["$or"] = [
         { "indonesia": regex },
         { "komering": regex },
